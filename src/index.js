@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'mobx-react';
-import CounterStore from './store/CounterStore';
+import {Provider} from 'mobx-react';
+import AttStore from './S022300080/store/AttStore';
 
-ReactDOM.render(
-  <Provider counterStore = {CounterStore}>
+const root = document.getElementById('root');
+
+ReactDOM.createRoot(root).render(
+  <Provider AttStore = {AttStore}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
 
 reportWebVitals();

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import CounterComponent from './component/CounterComponent';
+import AttendContainer from './S022300080/container/AttContainer';
 
 class App extends Component {
+ 
+  constructor (props) {
+    super(props)
+    
+    }
+
+
   render(){
     return (
-      <div>
-        <CounterComponent />
-      </div>
+
+      <AttendContainer/>
+    
   );
   }
 }
