@@ -1,33 +1,44 @@
 import React from "react";
 import axios from "axios";
-import { observable } from "mobx";
-import AttStore from '../store/AttStore'
 
 
-let userData = [];
+const getUserData = async ()=>{
 
-const getUserData = ()=>{
-   
-    console.log('axios activated')
-
-    axios.get('/rest/v1/s022300080/attend-list',{
+    console.log("Repository start => ")
+   try{
+    const res = await axios.get('/rest/v1/s022300080/attend-list',{
         params : {
             enterFlag: '',
             eventId : 4,
             hpNo: '',
             memberName: '',
         }
-    }
-    )
-    .then((res) => {
-        userData = res.data.data;
-        console.log(userData);
-        AttStore.setMemberData(userData);
-    })
-    .catch((err)=>{
-        console.log(err + "err")
-    })
 
+    });
+    console.log("sssss  :"+ (res.data.data instanceof Array) );
+    return res.data.data
+   }
+   catch(e) {
+    console.log(e)
+}
 };
 
 export default getUserData;
+
+
+
+// axios.get('/rest/v1/s022300080/attend-list',{
+    //     params : {
+    //         enterFlag: '',
+    //         eventId : 4,
+    //         hpNo: '',
+    //         memberName: '',
+    //     }
+    // }
+    // )
+    // .then((res) => {
+
+    //     let userData = res.data.data;
+    //     console.log(userData);
+
+    // });

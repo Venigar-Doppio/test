@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Input from '../../common/components/Input';
 import ImgSecondaryBtn from '../../common/components/ImgSecondaryBtn';
 import AttStore from "../store/AttStore";
-import {setSearchName} from "../store/AttStore";
 import {inject,observer} from 'mobx-react';
 import autobind from 'autobind-decorator';
 import AttList from "./AttListView";
@@ -33,8 +32,6 @@ const Container = styled.div`
     
 `;
 
-
-
 function onChangeSearchName(searchName){
 
     AttStore.setSearchName(searchName);
@@ -46,20 +43,15 @@ function onChangeSearchNumber(searchNumber){
     AttStore.setSearchNumber(searchNumber);
     console.log(searchNumber + "onChangeSearchNumber")
 }
-
-
-function onClickSearchEvent(){
-
-    console.log("before onClickEvent activated")
-
-    AttList.filtering()
-
-    console.log("onClickEvent activated")
+function onChangeSearchFlag(searchFlag){
+    console.log('onChangeSearchFlag activated')
+    AttStore.setSearchFlag(searchFlag);
+    console.log(searchFlag + "onChangeSearchFlag")
 }
 
-function onRemoveMember(){
-    AttStore.removeMember();
-    console.log('deleteBtn activated')
+function onSearchevent(){
+    console.log('onSearchevent() start ') ;
+    AttStore.setMembersData();
 }
 
 @inject('AttStore')
@@ -71,7 +63,7 @@ class AttSearch extends Component{
         return(
 
         <Container>
-
+    
             <div className="inputWrap">
 
                 <Input
@@ -82,17 +74,24 @@ class AttSearch extends Component{
                 placeholder="H.P"
                 onChange={(event)=>onChangeSearchNumber(event.target.value)}/> 
                 
-                <SelectBox/>
+                <SelectBox
+                onChange={(event)=>onChangeSearchFlag(event.target.value)}/>
+                
+                <div onClick={onSearchevent}>
+                    <button name="조회" >조회</button>
+                </div>    
             </div>
-
             <div className="btnWrap">
-                <div onClick = {onClickSearchEvent}>
+                <div>
                     <ImgSecondaryBtn/>
+                    출석등록
                 </div>
 
-                <div className='deleteBtn'onClick = {onRemoveMember}>
+                <div className='deleteBtn'>
+                    등록취소
                 </div>
             </div>
+           
         </Container>
 
         )

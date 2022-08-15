@@ -34,10 +34,9 @@ const SelectBox = ({ label, options = [], ...props }) => {
     return (
         <SelectBoxContainer>
             <label>{label}</label>
-            <select>
+            <select {...props}>
                 <option>Y</option>
                 <option>N</option>
-               
             </select>
         </SelectBoxContainer>
     )

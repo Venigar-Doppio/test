@@ -44,11 +44,15 @@ const Container = styled.div`
 class Table extends Component{
     render(){
 
-        const {members, onSelectedMember} =this.props;
-
+        // const {members, onSelectedMember} =this.props;
+        const {members1} = this.props ;
+        // console.log("Table start AttStore.setMembersData before -===> ");
+        // AttStore.setMembersData();
+        // console.log("Table AttStore.setMembersData after -===> ");
         return (
-            
+
             <Container>
+                
                 <table>
 
                     <thead>
@@ -66,9 +70,10 @@ class Table extends Component{
                     
                     <tbody>
                         {
-                        Array.isArray(members) && members.length ? 
-                        members.map((member) => (
-                        <tr key={member.id} onClick={()=>onSelectedMember(member)}>
+                        //Array.isArray(members) && members.length ?
+                        // Object.keys(members1).length ? 
+                        members1.map((member) => (
+                        <tr key={member.id} >
                             <td className="tableData">
                                 <input type='checkbox'></input>
                             </td>
@@ -81,10 +86,10 @@ class Table extends Component{
                             <td className="tableData">{member.enterFlag}</td>
                         </tr>
                         ))
-                        :
-                        <tr>
-                            <td className="empty" colSpan={6}>항목이 없습니다.</td>
-                        </tr>
+                        // `:
+                        // <tr>
+                        //     <td className="empty" colSpan={6}>항목이 없습니다.</td>
+                        // </tr>
                         }
                         
                     </tbody>
