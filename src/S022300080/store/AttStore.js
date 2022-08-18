@@ -1,6 +1,7 @@
 import React from 'react';
-import {observable, action, makeObservable} from 'mobx';
+import {observable, action, makeObservable, toJS} from 'mobx';
 import getUserData from '../repository/repository';
+import { data } from 'browserslist';
 
 
 class AttStore{
@@ -14,8 +15,6 @@ class AttStore{
    @observable
    _members=[];
 
-   @observable
-   _members_1= {};
 
    @observable
    _searchName = '';
@@ -23,17 +22,17 @@ class AttStore{
    @observable
    _searchNumber = '';
 
-   @observable
-   _searchFlag = '';
+    @observable
+    _searchFlag = '';
 
     get member(){
         return this._member;
     }
 
-    get members1(){
-        return this._members_1;
+    get members(){
+        return this._members;
     }
-   
+
    get searchName(){
        return this._searchName;
    }
@@ -74,41 +73,15 @@ class AttStore{
    }
 
     @action
-    setMembersData(){
-        console.log("setMembersData() start this._members :"+ (this._members instanceof Array)) ;
-        this._members = getUserData() ;
+    async setMembersData(members) {
+        const data = await getUserData();
+
+        this._members = data;
+    
+        console.log(toJS(this._members));
+
     }
-  
-    @action
-    setMembersData1(){
-        console.log("setMembersData1() start this._members_1 :"+ (this._members_1  instanceof Array)) ;
-        this._members_1 = getUserData() ;
-        console.log("setMembersData1() this._members1 :"+ (this._members_1 instanceof Object)) ;
-        console.log(Object.keys(this._members_1)) ;
-    }
-
-//    @action
-//    addMember(member){
-//        this._members.push(member);
-//    } 
-
-    // @action
-    // removeMember(){
-    //     let index = this._members.findIndex(member => member.id === this._member.id);
-    //     if(index > -1){
-    //         this._members.splice(index,1);
-    //     }
-    //     this._member ={}
-    // }
-
-    // @action
-    // updateMember(){
-    //     let foundMember = this._members.find( (member)=> member.memberId === this._member.memberId )
-    //     foundMember.title = this._member.title;
-    //     foundMember.date = this._member.date;
-    //     this._todo = {};
-    // }
-
+    
 }
 
 export default new AttStore;
